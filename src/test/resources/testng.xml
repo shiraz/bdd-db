@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cucumber_TestNG Runner" parallel="classes" thread-count="5">
+    <test name="Postgres DB Tests">
+        <packages>
+            <package name="com.bdd_db.runners.*"/>
+        </packages>
+    </test>
+</suite>
