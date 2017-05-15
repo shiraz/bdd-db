@@ -1,12 +1,12 @@
 package com.bdd_db.definitions;
 
+import com.bdd_db.config.PropertiesConfig;
 import com.bdd_db.libs.database.DvdDb;
 import com.bdd_db.libs.utils.ReportLogger;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.sql.SQLException;
 
 /**
  * <p>
@@ -16,20 +16,22 @@ import java.util.Properties;
 public class StepDefinitions {
 
     /**
-     * Declare all test variables.
+     * Declare all framework variables.
      */
     private DvdDb db;
+    private PropertiesConfig propertiesConfig = PropertiesConfig.getInstance();
 
-    @Given("^that the user has access to the Postgres database$")
+    @Given("^that the user can connect to the Postgres database$")
     public void accessDb() {
-        Properties mavenProps = new Properties();
-        InputStream in = StepDefinitions.class.getResourceAsStream("C:\\Workspace\\BDD\\bdd-db\\src\\test\\resources\\maven.properties");
+        // Initialize the database object.
+        this.db = new DvdDb(propertiesConfig.getDbHost(), propertiesConfig.getDbPort(), propertiesConfig.getDbName(),
+                propertiesConfig.getDbUsername(), propertiesConfig.getDbPwd());
         try {
-            mavenProps.load(in);
-            ReportLogger.logMessage("host --> " + mavenProps.getProperty("host"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            // Connect to the database, and verify that the connection is established.
+            this.db.connectToDb();
         }
-
+        catch (SQLException e) {
+            ReportLogger.logSevereMessageThenFail(e.getMessage());
+        }
     }
 }

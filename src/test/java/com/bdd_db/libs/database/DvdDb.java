@@ -23,8 +23,7 @@ public class DvdDb {
     /**
      * Instance variables.
      */
-    private String host, dbName, dbUsername, dbPwd;
-    private int port;
+    private String host, dbName, dbUsername, dbPwd, port;
     private Connection conn;
 
     /**
@@ -40,12 +39,12 @@ public class DvdDb {
      * </p>
      *
      * @param host {@link String} - The database host.
-     * @param port {@link Integer} - The database port.
+     * @param port {@link String} - The database port.
      * @param dbName {@link String} - The database name.
      * @param dbUsername {@link String} - The database username.
      * @param dbPwd {@link String} - The database password.
      */
-    public DvdDb(String host, int port, String dbName, String dbUsername, String dbPwd) {
+    public DvdDb(String host, String port, String dbName, String dbUsername, String dbPwd) {
         this.host = host;
         this.port = port;
         this.dbName = dbName;
@@ -81,7 +80,7 @@ public class DvdDb {
      */
     public boolean connectToDb() throws SQLException {
         // Setup the connection string.
-        String connectionString = String.format(CONNECTION_STRING, this.host, String.valueOf(this.port), this.dbName);
+        String connectionString = String.format(CONNECTION_STRING, this.host, this.port, this.dbName);
         try {
             Class.forName(CLASS_NAME_POSTGRES_DRIVER);
         }

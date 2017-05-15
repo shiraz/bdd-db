@@ -9,18 +9,18 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
  * The test runner class.
  * </p>
  */
-@ExtendedCucumberOptions(jsonReport = "target/cucumber.utils",
-        retryCount = 1,
+@ExtendedCucumberOptions(jsonReport = "target/cucumber.json",
         detailedReport = true,
         detailedAggregatedReport = true,
         overviewReport = true,
-        jsonUsageReport = "target/cucumber-usage.utils",
+        overviewChartsReport = true,
+        jsonUsageReport = "target/cucumber-usage.json",
         usageReport = true,
         toPDF = true,
         outputFolder = "target")
 @CucumberOptions(plugin = { "html:target/cucumber-html-report",
-        "utils:target/cucumber.utils", "pretty:target/cucumber-pretty.txt",
-        "usage:target/cucumber-usage.utils", "junit:target/cucumber-results.xml" },
+        "json:target/cucumber.json", "pretty:target/cucumber-pretty.txt",
+        "usage:target/cucumber-usage.json", "junit:target/cucumber-results.xml" },
         features = { "src/test/resources/features" },
         strict = true,
         glue = { "com.bdd_db.definitions" })

@@ -10,7 +10,7 @@ public class Sandbox {
 
     public static void main(String[] argv) {
         try {
-            DvdDb db = new DvdDb("localhost", 5432, "dvdrental", "postgres", "admin");
+            DvdDb db = new DvdDb("localhost", "5432", "dvdrental", "postgres", "admin");
             db.connectToDb();
             JsonArray results = db.executeQuery("SELECT * FROM customer WHERE email = 'FEF@gmail.com'");
             String test = db.loadSqlFile("customers_segment");
