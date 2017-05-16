@@ -32,6 +32,7 @@ public class DvdDb {
     private static final String CLASS_NAME_POSTGRES_DRIVER = "org.postgresql.Driver";
     private static final String CONNECTION_STRING = "jdbc:postgresql://%s:%s/%s";
     private static final String INIT_SQL = "SELECT to_json(array_agg(t)) FROM (%s) t";
+    private static final String SQL_FILE_EXTENSION = ".sql";
 
     /**
      * <p>
@@ -167,7 +168,7 @@ public class DvdDb {
         String finalQuery = null;
         try {
             // Get the .sql file path.
-            String sqlFilePath = getSqlFilesPath() + sqlFileName + ".sql";
+            String sqlFilePath = getSqlFilesPath().concat(sqlFileName).concat(SQL_FILE_EXTENSION);
             // Load the file.
             BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath));
             // Initialize a string builder to store the contents.
