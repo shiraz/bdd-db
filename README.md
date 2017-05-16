@@ -25,9 +25,9 @@ This is a Maven project that has Cucumber tests that validates a DVD rental busi
     1. **mvn clean test -Dhost=localhost -DdbName=dvdrental -DdbPort=[port where the PostgreSQL database is setup] -DdbUsername=[The admin username of the local PostgreSQL setup] -DdbPwd=[The admin password of the local PostgreSQL setup]**
         1. Example: mvn clean test -Dhost=localhost -DdbName=dvdrental -DdbPort=5432 -DdbUsername=postgres -DdbPwd=admin
 7. The reports can be found at the following locations: 
-    1. Cucumber HTML Report: target/cucumber-html-report/index.html
+    1. Cucumber HTML Report: **target/cucumber-html-report/index.html**
         1. Note: This report only contains BDD data and no logs.
-    2. Cucumber TestNG Report: target/surefire-reports/Cucumber_TestNG Runner
+    2. Cucumber TestNG Report: **target/surefire-reports/Cucumber_TestNG Runner**
         1. Note: This report contains both BDD and logs reporting, which therefore makes it the best report for viewing 
-    3. TestNG Report: target/surefire-reports/emailable-report.html
+    3. TestNG Report: **target/surefire-reports/emailable-report.html**
         1. Note: This report only has test report logs.
