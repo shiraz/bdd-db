@@ -11,3 +11,11 @@ Feature: DVD Rentals Segmentation and Engagement
     Then execute the country by revenue query
     And verify that United States is one of the top 3 earners
     And print data pertaining to the top 3 countries that bring in the most revenue
+
+  """
+  @regression
+  Scenario: User Segmentation
+    When an SQL query has been developed to get all United States users who have paid less than the overall average amount
+    Then verify that all user email addresses are not blank or empty
+    And verify that all user email addresses are valid
+  """
