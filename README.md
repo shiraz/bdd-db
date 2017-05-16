@@ -2,16 +2,18 @@
 
 ### Project Description:
 This is a Maven project that has Cucumber tests that validates a DVD rental business data using the following technologies:
-1. Cucumber
-2. Gherkin
-3. Gson
-4. Java 1.8
-5. Maven
-6. PostgreSQL
-7. TestNG
+1. Apache
+    1. Commons
+    2. Lang3
+2. Cucumber
+3. Gherkin
+4. Gson
+5. Java 1.8
+6. Maven
+7. PostgreSQL
+8. TestNG
 
 ### Test Description:
-The test first establishes a connection 
 
 ### Steps to Execute Tests:
 1. Install Java 1.8 or higher.
