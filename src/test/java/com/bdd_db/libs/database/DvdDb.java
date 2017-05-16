@@ -110,6 +110,8 @@ public class DvdDb {
      * @throws SQLException
      */
     public JsonArray executeQuery(String query) throws SQLException {
+        ReportLogger.logMessageWithIndent("Executing the following SQL query in the PostgreSQL database:");
+        ReportLogger.logMessage(query);
         // Initialize a new JsonArray.
         JsonArray results = new JsonArray();
         // Embed the query in an aggregate one to return values in JSON format.
@@ -126,6 +128,7 @@ public class DvdDb {
                 results = JsonUtils.convertStringToJson(resultString).getAsJsonArray();
             }
         }
+        ReportLogger.logMessageWithIndent("...SUCCESSFUL. The SQL query was executed.");
         // Return the processed JsonArray.
         return results;
     }
@@ -137,7 +140,7 @@ public class DvdDb {
      *
      * @return {@link String} - The path to all .sql files.
      */
-    public String getSqlFilesPath() {
+    private String getSqlFilesPath() {
         String sqlFilesPath = null;
         // Get the SQL queries path.
         try {
@@ -159,7 +162,7 @@ public class DvdDb {
      * @param sqlFileName {@link String} - The name of the ".sql" file.
      * @return {@link String} - The query from the .sql file.
      */
-    public String loadSqlFile(String sqlFileName) {
+    public String getSqlFromSqlFile(String sqlFileName) {
         // Initialize a string to store the final query.
         String finalQuery = null;
         try {
