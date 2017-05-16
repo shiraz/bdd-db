@@ -62,7 +62,7 @@ public class DvdDb {
     public void closeDb() throws SQLException {
         ReportLogger.logMessageWithIndent("Closing the database connection...");
         this.conn.close();
-        if(this.conn.isClosed()) {
+        if (this.conn.isClosed()) {
             ReportLogger.logMessage("...SUCCESSFUL. The connection has been closed.");
         }
         else {
@@ -91,7 +91,7 @@ public class DvdDb {
         this.conn = DriverManager.getConnection(connectionString, this.dbUsername, this.dbPwd);
         // Check to see if the connection is open.
         boolean isClosed = this.conn.isClosed();
-        if(!isClosed) {
+        if (!isClosed) {
             ReportLogger.logMessage("...SUCCESSFUL. The connection to the database has been established.");
             return true;
         }
@@ -121,7 +121,7 @@ public class DvdDb {
         // Execute the query.
         ResultSet resultSet = preparedStatement.executeQuery();
         // Store the result.
-        if(resultSet.next()) {
+        if (resultSet.next()) {
             String resultString = resultSet.getString(1);
             if(resultString != null) {
                 // Convert the string to a JsonArray, and then return it.
