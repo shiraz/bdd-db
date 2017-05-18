@@ -34,7 +34,7 @@ acceptance criteria in the .feature file are validated. The developed SQL querie
         4. Populate "Host" as "localhost".
         5. Populate "Port" as "5432".
         6. Populate "Username" as "postgres".
-        7. Populate "Password" as the value noted down in step 3.1.
+        7. Populate "Password" as the value noted down in step 3.i.
             1. If no password was set, then leave it blank.
             2. Alternatively, a new password can be setup by doing the following: 
                 1. Access Terminal or Command Prompt.
@@ -42,7 +42,7 @@ acceptance criteria in the .feature file are validated. The developed SQL querie
                 3. Execute the command, "\password".
                 4. Type a new password. Press Enter.
                 5. Retype the new password. Press Enter.
-                6. This new password can now be used in step 7.
+                6. This new password can now be used in step 5.ii.g.
         8. Click OK. The "localhost" connection will now be operational.
         9. In pgAdmin, double click on the "localhost" connection.
         10. Right click on "Databases".
