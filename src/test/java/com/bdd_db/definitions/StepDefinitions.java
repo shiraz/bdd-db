@@ -5,6 +5,7 @@ import com.bdd_db.constants.PropertyConstants;
 import com.bdd_db.constants.SqlFileConstants;
 import com.bdd_db.libs.database.DvdDb;
 import com.bdd_db.libs.utils.ReportLogger;
+import com.bdd_db.libs.validation.Validator;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import cucumber.api.java.en.And;
@@ -31,7 +32,7 @@ public class StepDefinitions {
     /**
      * Test level variables.
      */
-    private String countryRevenueSqlQuery = null;
+    private String countryRevenueSqlQuery, userSegmentQuery = null;
     private JsonArray results = new JsonArray();
 
     /**
@@ -69,6 +70,8 @@ public class StepDefinitions {
             // Assert that the result data set is not empty.
             Assert.assertTrue(this.results.size() > 0, "No results were returned after the country by "
                     + "revenue SQL query was executed.");
+            // Close the database connection.
+            this.db.closeDb();
         }
         catch (SQLException e) {
             ReportLogger.logSevereMessageThenFail(e.getMessage());
@@ -107,7 +110,46 @@ public class StepDefinitions {
             // Store the rank for reporting purposes.
             int rank = i + 1;
             // Print the data.
-            ReportLogger.logMessageWithIndent("Rank " + rank + ": " + x.toString());
+            ReportLogger.logMessageWithIndent("<b>Rank " + rank + ": </b>" + x.toString());
         }
+    }
+
+    @When("^an SQL query has been developed to get all United States users who have paid less than the overall average amount$")
+    public void getUserSegmentationSqlQuery() {
+        // Get the query from the .sql file.
+        this.userSegmentQuery = this.db.getSqlFromSqlFile(SqlFileConstants.SQL_FILE_CUSTOMER_SEGMENT);
+        // Verify that the query string is not empty.
+        Assert.assertTrue(StringUtils.isNotEmpty(this.userSegmentQuery));
+    }
+
+    @And("^execute the user segmentation query$")
+    public void executeUserSegmentQuery() {
+        try {
+            // Execute the query, and store the result.
+            this.results = this.db.executeQuery(this.userSegmentQuery);
+            // Assert that the result data set is not empty.
+            Assert.assertTrue(this.results.size() > 0, "No results were returned after the user segmentation "
+                    + "SQL query was executed.");
+            // Close the database connection.
+            this.db.closeDb();
+        }
+        catch (SQLException e) {
+            ReportLogger.logSevereMessageThenFail(e.getMessage());
+        }
+    }
+
+    @And("^verify that all user email addresses are not blank or empty$")
+    public void verifyResultantEmailAreNotBlankOrEmpty() {
+        ReportLogger.logMessageWithIndent("Verifying that all the resultant emails are not empty or blank or null...");
+        this.results.forEach(x -> Validator.verifyIfStringIsNotEmpty(x.getAsJsonObject()
+                .get(PropertyConstants.EMAIL).getAsString()));
+    }
+
+    @And("^verify that all user email addresses are valid$")
+    public void verifyResultantEmailAreValidEmails() {
+        ReportLogger.logMessageWithIndent("Verifying that all the resultant emails are valid emails "
+                + "and are not malformed in any way...");
+        this.results.forEach(x -> Validator.verifyIfStringIsValidEmail(x.getAsJsonObject()
+                .get(PropertyConstants.EMAIL).getAsString()));
     }
 }

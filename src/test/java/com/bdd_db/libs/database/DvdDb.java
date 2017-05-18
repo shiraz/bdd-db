@@ -112,7 +112,7 @@ public class DvdDb {
      */
     public JsonArray executeQuery(String query) throws SQLException {
         ReportLogger.logMessageWithIndent("Executing the following SQL query in the PostgreSQL database:");
-        ReportLogger.logMessageWithIndent(query);
+        ReportLogger.logMessageWithIndent("<b>" + query + "</b>");
         // Initialize a new JsonArray.
         JsonArray results = new JsonArray();
         // Embed the query in an aggregate one to return values in JSON format.

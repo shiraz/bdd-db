@@ -8,6 +8,7 @@ package com.bdd_db.constants;
 public final class PropertyConstants {
 
     public static final String COUNTRY = "country";
+    public static final String EMAIL = "email";
 
     /**
      * <p>
