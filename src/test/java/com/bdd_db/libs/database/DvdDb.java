@@ -23,7 +23,11 @@ public class DvdDb {
     /**
      * Instance variables.
      */
-    private String host, dbName, dbUsername, dbPwd, port;
+    private final String host;
+    private final String dbName;
+    private final String dbUsername;
+    private final String dbPwd;
+    private final String port;
     private Connection conn;
 
     /**
@@ -58,7 +62,7 @@ public class DvdDb {
      * Closes the connection to the database.
      * </p>
      *
-     * @throws SQLException
+     * @throws SQLException if database related errors occur.
      */
     public void closeDb() throws SQLException {
         ReportLogger.logMessageWithIndent("Closing the database connection...");
@@ -76,10 +80,9 @@ public class DvdDb {
      * Connects to the Postgres database.
      * </p>
      *
-     * @return {@link Boolean} - Returns true if the connection is established. False otherwise.
-     * @throws SQLException
+     * @throws SQLException if database related errors occur.
      */
-    public boolean connectToDb() throws SQLException {
+    public void connectToDb() throws SQLException {
         // Setup the connection string.
         String connectionString = String.format(CONNECTION_STRING, this.host, this.port, this.dbName);
         try {
@@ -94,10 +97,9 @@ public class DvdDb {
         boolean isClosed = this.conn.isClosed();
         if (!isClosed) {
             ReportLogger.logMessage("...SUCCESSFUL. The connection to the database has been established.");
-            return true;
         }
         else {
-            return false;
+            ReportLogger.logSevereMessageThenFail("...FAIL. The connection failed to connect to the database.");
         }
     }
 
@@ -108,7 +110,7 @@ public class DvdDb {
      *
      * @param query {@link String} - The SQL query.
      * @return {@link JsonArray} - The SQL query results.
-     * @throws SQLException
+     * @throws SQLException if database related errors occur.
      */
     public JsonArray executeQuery(String query) throws SQLException {
         ReportLogger.logMessageWithIndent("Executing the following SQL query in the PostgreSQL database:");

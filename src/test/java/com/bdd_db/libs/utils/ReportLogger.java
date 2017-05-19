@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class ReportLogger {
 
     // Initialize logger.
-    private static Logger LOGGER = Logger.getLogger(ReportLogger.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ReportLogger.class.getName());
 
     /**
      * <p>
