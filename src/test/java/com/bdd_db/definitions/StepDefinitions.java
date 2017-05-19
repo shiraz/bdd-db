@@ -1,7 +1,7 @@
 package com.bdd_db.definitions;
 
 import com.bdd_db.config.PropertiesConfig;
-import com.bdd_db.constants.PropertyConstants;
+import com.bdd_db.constants.ColumnConstants;
 import com.bdd_db.constants.SqlFileConstants;
 import com.bdd_db.libs.database.DvdDb;
 import com.bdd_db.libs.utils.ReportLogger;
@@ -27,7 +27,7 @@ public class StepDefinitions {
      * Declare all framework variables.
      */
     private DvdDb db;
-    private PropertiesConfig propertiesConfig = PropertiesConfig.getInstance();
+    private final PropertiesConfig propertiesConfig = PropertiesConfig.getInstance();
 
     /**
      * Test level variables.
@@ -86,7 +86,7 @@ public class StepDefinitions {
         for (int i = 0; i <= 2; i++) {
             // Store the current JSON object.
             JsonObject x = this.results.get(i).getAsJsonObject();
-            if (x.get(PropertyConstants.COUNTRY).getAsString().equals(UNITED_STATES)) {
+            if (x.get(ColumnConstants.COUNTRY).getAsString().equals(UNITED_STATES)) {
                 usFlag = true;
                 break;
             }
@@ -142,7 +142,7 @@ public class StepDefinitions {
     public void verifyResultantEmailAreNotBlankOrEmpty() {
         ReportLogger.logMessageWithIndent("Verifying that all the resultant emails are not empty or blank or null...");
         this.results.forEach(x -> Validator.verifyIfStringIsNotEmpty(x.getAsJsonObject()
-                .get(PropertyConstants.EMAIL).getAsString()));
+                .get(ColumnConstants.EMAIL).getAsString()));
     }
 
     @And("^verify that all user email addresses are valid$")
@@ -150,6 +150,6 @@ public class StepDefinitions {
         ReportLogger.logMessageWithIndent("Verifying that all the resultant emails are valid emails "
                 + "and are not malformed in any way...");
         this.results.forEach(x -> Validator.verifyIfStringIsValidEmail(x.getAsJsonObject()
-                .get(PropertyConstants.EMAIL).getAsString()));
+                .get(ColumnConstants.EMAIL).getAsString()));
     }
 }

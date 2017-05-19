@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
+/**
+ * <p>
+ *  This is a configuration class where all the database related properties are handled, and returned.
+ * </p>
+ */
 public class PropertiesConfig {
 
     /**
